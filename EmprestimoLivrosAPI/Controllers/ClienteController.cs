@@ -1,3 +1,5 @@
+using AutoMapper;
+using EmprestimoLivrosAPI.DTOs;
 using EmprestimoLivrosAPI.Models;
 using EmprestimoLivrosAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -10,26 +12,32 @@ namespace EmprestimoLivrosAPI.Controllers {
 
         private readonly IClienteRepository _clienteRepository;
 
-        public ClienteController(IClienteRepository clientRepository) {
+        private readonly IMapper _mapper;
+
+        public ClienteController(IClienteRepository clientRepository, IMapper mapper) {
             _clienteRepository = clientRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Cliente>>> Get() {
             var clientes = await _clienteRepository.Get();
-            return Ok(clientes);
+            var clientesDTO = _mapper.Map<List<ClienteDTO>>(clientes);
+            return Ok(clientesDTO);
         }
 
         [HttpGet("id")]
         public async Task<ActionResult<Cliente>> GetById(int id) {
             var cliente = await _clienteRepository.GetById(id);
             if(cliente == null) return NotFound();
-            return Ok(cliente);
+            var clienteDTO = _mapper.Map<ClienteDTO>(cliente);
+            return Ok(clienteDTO);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Cliente>> Create([FromBody] Cliente clienteDTO) {
-            var result = await _clienteRepository.Create(clienteDTO);
+        public async Task<ActionResult<Cliente>> Create([FromBody] ClienteDTO clienteDTO) {
+            var cliente = _mapper.Map<Cliente>(clienteDTO);
+            var result = await _clienteRepository.Create(cliente);
             if(result == null) return BadRequest();
             return Created();
         }
