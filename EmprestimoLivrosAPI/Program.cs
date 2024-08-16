@@ -1,4 +1,6 @@
 using EmprestimoLivrosAPI.Database;
+using EmprestimoLivrosAPI.Repositories;
+using EmprestimoLivrosAPI.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,8 @@ builder.Services.AddEntityFrameworkMySql()
     .AddDbContext<EmprestimoDbContext>(
         options => options.UseMySql(connectionString, serverVersion)
     );
+
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
     
 var app = builder.Build();
 
