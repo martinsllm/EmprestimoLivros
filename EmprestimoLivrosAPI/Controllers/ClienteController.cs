@@ -42,5 +42,19 @@ namespace EmprestimoLivrosAPI.Controllers {
             return Created();
         }
 
+        [HttpPut("id")]
+        public async Task<ActionResult<Cliente>> Update([FromBody] ClienteDTO clienteDTO, int id) {
+            var cliente = _mapper.Map<Cliente>(clienteDTO);
+            var result = await _clienteRepository.Update(cliente, id);
+            if(result == null) return NotFound();
+            return NoContent();
+        }
+
+        [HttpDelete("id")]
+        public async Task<ActionResult<Cliente>> Remove(int id) {
+            var result = await _clienteRepository.Remove(id);
+            if(result == null) return NotFound();
+            return Created();
+        }
     }
 }

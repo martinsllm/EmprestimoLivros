@@ -10,9 +10,9 @@ namespace EmprestimoLivrosAPI.Repositories.Interfaces {
 
         Task<Cliente> Create(Cliente cliente);
 
-        Task<Cliente> Update(Cliente cliente, int id);
+        Task<Cliente?> Update(Cliente cliente, int id);
 
-        Task<Cliente> Remove(int id);
+        Task<Cliente?> Remove(int id);
 
     }
 }

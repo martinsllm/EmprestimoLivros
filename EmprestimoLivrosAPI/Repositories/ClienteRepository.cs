@@ -28,12 +28,34 @@ namespace EmprestimoLivrosAPI.Repositories {
             return cliente;
         }
 
-        public async Task<Cliente> Update(Cliente cliente, int id) {
-            throw new NotImplementedException();
+        public async Task<Cliente?> Update(Cliente cliente, int id) {
+            var foundClient = await GetById(id);
+
+            if(foundClient != null) { 
+                foundClient.Nome = cliente.Nome;
+                foundClient.Email = cliente.Email;
+                foundClient.Telefone = cliente.Telefone;
+
+                _context.Clientes.Update(foundClient);
+                await _context.SaveChangesAsync();
+
+                return cliente;
+            }
+
+            return null;
         }
 
-        public async Task<Cliente> Remove(int id) {
-            throw new NotImplementedException();
+        public async Task<Cliente?> Remove(int id) {
+            var foundClient = await GetById(id);
+
+            if(foundClient != null) {
+                _context.Clientes.Remove(foundClient);
+                await _context.SaveChangesAsync();
+
+                return foundClient;
+            }
+
+            return null;
         }
     }
 }
