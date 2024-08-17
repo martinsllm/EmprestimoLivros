@@ -9,6 +9,8 @@ namespace EmprestimoLivrosAPI.Services {
         public MappingDTO() {
             CreateMap<Cliente, ClienteDTO>().ReverseMap();
             CreateMap<Livro, LivroDTO>().ReverseMap();
+            CreateMap<Emprestimo, EmprestimoDTO>().ReverseMap();
+            CreateMap<Emprestimo, EmprestimoPostDTO>().ReverseMap();
         }
         
     }

@@ -24,6 +24,7 @@ builder.Services.AddEntityFrameworkMySql()
 
 builder.Services.AddScoped<IEntityRepository<Cliente>, ClienteRepository>();
 builder.Services.AddScoped<IEntityRepository<Livro>, LivroRepository>();
+builder.Services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
 builder.Services.AddAutoMapper(typeof(MappingDTO));
     
 var app = builder.Build();
