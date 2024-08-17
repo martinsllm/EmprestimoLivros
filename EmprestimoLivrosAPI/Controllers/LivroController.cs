@@ -42,5 +42,20 @@ namespace EmprestimoLivrosAPI.Controllers {
             return Created();
         }
 
+        [HttpPut("id")]
+        public async Task<ActionResult<Livro>> Update([FromBody] LivroDTO livroDTO, int id) {
+            var livro = _mapper.Map<Livro>(livroDTO);
+            var result = await _livroRepository.Update(livro, id);
+            if(result == null) return NotFound();
+            return NoContent();
+        }
+
+        [HttpDelete("id")]
+        public async Task<ActionResult<Livro>> Remove(int id) {
+            var result = await _livroRepository.Remove(id);
+            if(result == null) return NotFound();
+            return NoContent();
+        }
+
     }
 }
