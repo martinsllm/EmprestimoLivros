@@ -10,11 +10,11 @@ namespace EmprestimoLivrosAPI.Controllers {
     [ApiController]
     public class ClienteController : ControllerBase {
 
-        private readonly IClienteRepository _clienteRepository;
+        private readonly IEntityRepository<Cliente> _clienteRepository;
 
         private readonly IMapper _mapper;
 
-        public ClienteController(IClienteRepository clientRepository, IMapper mapper) {
+        public ClienteController(IEntityRepository<Cliente> clientRepository, IMapper mapper) {
             _clienteRepository = clientRepository;
             _mapper = mapper;
         }

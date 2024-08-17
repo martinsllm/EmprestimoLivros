@@ -1,4 +1,5 @@
 using EmprestimoLivrosAPI.Database;
+using EmprestimoLivrosAPI.Models;
 using EmprestimoLivrosAPI.Repositories;
 using EmprestimoLivrosAPI.Repositories.Interfaces;
 using EmprestimoLivrosAPI.Services;
@@ -21,7 +22,8 @@ builder.Services.AddEntityFrameworkMySql()
         options => options.UseMySql(connectionString, serverVersion)
     );
 
-builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IEntityRepository<Cliente>, ClienteRepository>();
+builder.Services.AddScoped<IEntityRepository<Livro>, LivroRepository>();
 builder.Services.AddAutoMapper(typeof(MappingDTO));
     
 var app = builder.Build();

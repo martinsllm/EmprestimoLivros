@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmprestimoLivrosAPI.Repositories {
 
-    public class ClienteRepository : IClienteRepository {
+    public class ClienteRepository : IEntityRepository<Cliente> {
 
         private readonly EmprestimoDbContext _context;
 
@@ -22,21 +22,21 @@ namespace EmprestimoLivrosAPI.Repositories {
             return await _context.Clientes.FindAsync(id);
         }
 
-        public async Task<Cliente> Create(Cliente cliente) {
-            await _context.Clientes.AddAsync(cliente);
+        public async Task<Cliente> Create(Cliente clienteData) {
+            await _context.Clientes.AddAsync(clienteData);
             await _context.SaveChangesAsync();
-            return cliente;
+            return clienteData;
         }
 
-        public async Task<Cliente?> Update(Cliente cliente, int id) {
-            var foundClient = await GetById(id);
+        public async Task<Cliente?> Update(Cliente clienteData, int id) {
+            var cliente = await GetById(id);
 
-            if(foundClient != null) { 
-                foundClient.Nome = cliente.Nome;
-                foundClient.Email = cliente.Email;
-                foundClient.Telefone = cliente.Telefone;
+            if(cliente != null) { 
+                cliente.Nome = clienteData.Nome;
+                cliente.Email = clienteData.Email;
+                cliente.Telefone = clienteData.Telefone;
 
-                _context.Clientes.Update(foundClient);
+                _context.Clientes.Update(cliente);
                 await _context.SaveChangesAsync();
 
                 return cliente;
@@ -46,13 +46,13 @@ namespace EmprestimoLivrosAPI.Repositories {
         }
 
         public async Task<Cliente?> Remove(int id) {
-            var foundClient = await GetById(id);
+            var cliente = await GetById(id);
 
-            if(foundClient != null) {
-                _context.Clientes.Remove(foundClient);
+            if(cliente != null) {
+                _context.Clientes.Remove(cliente);
                 await _context.SaveChangesAsync();
 
-                return foundClient;
+                return cliente;
             }
 
             return null;
