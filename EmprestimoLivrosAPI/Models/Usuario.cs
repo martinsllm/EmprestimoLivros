@@ -11,8 +11,6 @@ namespace EmprestimoLivrosAPI.Models {
 
         public required string Email { get; set; }
 
-        [MinLength(6)]
-        [MaxLength(12)]
         public required string Password { get; set; }
     }
 }
