@@ -7,7 +7,9 @@ namespace EmprestimoLivrosAPI.Repositories.Interfaces {
 
         Task<Usuario> Create(Usuario usuario);
 
-        Task<Usuario?> Login(LoginDTO login);
+        Task<string?> Login(LoginDTO login);
+
+        string GenerateToken(int id, string email);
         
     }
 }

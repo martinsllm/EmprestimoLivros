@@ -1,10 +1,13 @@
+using System.Text;
 using EmprestimoLivrosAPI;
 using EmprestimoLivrosAPI.Database;
 using EmprestimoLivrosAPI.Models;
 using EmprestimoLivrosAPI.Repositories;
 using EmprestimoLivrosAPI.Repositories.Interfaces;
 using EmprestimoLivrosAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +25,18 @@ builder.Services.AddEntityFrameworkMySql()
     .AddDbContext<EmprestimoDbContext>(
         options => options.UseMySql(connectionString, serverVersion)
     );
+
+builder.Services.AddAuthentication(opt => {
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options => {
+    options.TokenValidationParameters = new TokenValidationParameters {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Settings.Secret)),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
 
 builder.Services.AddScoped<IEntityRepository<Cliente>, ClienteRepository>();
 builder.Services.AddScoped<IEntityRepository<Livro>, LivroRepository>();

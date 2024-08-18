@@ -31,7 +31,7 @@ namespace EmprestimoLivrosAPI.Controllers {
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<Usuario>> LOgin([FromBody] LoginDTO login) {
+        public async Task<ActionResult<Usuario>> Login([FromBody] LoginDTO login) {
             var usuario = await _usuarioRepository.Login(login);
             if(usuario == null) return Unauthorized();
             return Ok(usuario);
