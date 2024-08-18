@@ -1,3 +1,4 @@
+using EmprestimoLivrosAPI;
 using EmprestimoLivrosAPI.Database;
 using EmprestimoLivrosAPI.Models;
 using EmprestimoLivrosAPI.Repositories;
@@ -12,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddInfraestructureSwagger();
 
 var connectionString = builder.Configuration["ConnectionString"];
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
