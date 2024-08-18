@@ -2,6 +2,7 @@ using AutoMapper;
 using EmprestimoLivrosAPI.DTOs;
 using EmprestimoLivrosAPI.Models;
 using EmprestimoLivrosAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoLivrosAPI.Controllers {
@@ -20,6 +21,7 @@ namespace EmprestimoLivrosAPI.Controllers {
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<List<Cliente>>> Get() {
             var clientes = await _clienteRepository.Get();
             var clientesDTO = _mapper.Map<List<ClienteDTO>>(clientes);
@@ -27,6 +29,7 @@ namespace EmprestimoLivrosAPI.Controllers {
         }
 
         [HttpGet("id")]
+        [Authorize]
         public async Task<ActionResult<Cliente>> GetById(int id) {
             var cliente = await _clienteRepository.GetById(id);
             if(cliente == null) return NotFound();
@@ -35,6 +38,7 @@ namespace EmprestimoLivrosAPI.Controllers {
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Cliente>> Create([FromBody] ClienteDTO clienteDTO) {
             var cliente = _mapper.Map<Cliente>(clienteDTO);
             var result = await _clienteRepository.Create(cliente);
@@ -43,6 +47,7 @@ namespace EmprestimoLivrosAPI.Controllers {
         }
 
         [HttpPut("id")]
+        [Authorize]
         public async Task<ActionResult<Cliente>> Update([FromBody] ClienteDTO clienteDTO, int id) {
             var cliente = _mapper.Map<Cliente>(clienteDTO);
             var result = await _clienteRepository.Update(cliente, id);
@@ -51,6 +56,7 @@ namespace EmprestimoLivrosAPI.Controllers {
         }
 
         [HttpDelete("id")]
+        [Authorize]
         public async Task<ActionResult<Cliente>> Remove(int id) {
             var result = await _clienteRepository.Remove(id);
             if(result == null) return NotFound();

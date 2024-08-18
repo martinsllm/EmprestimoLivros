@@ -2,6 +2,7 @@ using AutoMapper;
 using EmprestimoLivrosAPI.DTOs;
 using EmprestimoLivrosAPI.Models;
 using EmprestimoLivrosAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoLivrosAPI.Controllers {
@@ -20,6 +21,7 @@ namespace EmprestimoLivrosAPI.Controllers {
         }
 
         [HttpGet("cliente/id")]
+        [Authorize]
         public async Task<ActionResult<Emprestimo>> GetByCliente(int id) {
             var emprestimos = await _emprestimoRepository.GetByCliente(id);
             var emprestimosDTO = _mapper.Map<List<EmprestimoDTO>>(emprestimos);
@@ -27,6 +29,7 @@ namespace EmprestimoLivrosAPI.Controllers {
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Emprestimo>> Create([FromBody] EmprestimoPostDTO emprestimoDTO) {
             var emprestimo = _mapper.Map<Emprestimo>(emprestimoDTO);
             var result = await _emprestimoRepository.Create(emprestimo);
@@ -35,6 +38,7 @@ namespace EmprestimoLivrosAPI.Controllers {
         }
 
         [HttpDelete("id")]
+        [Authorize]
         public async Task<ActionResult<Emprestimo>> Remove(int id) {
             var result = await _emprestimoRepository.Remove(id);
             if(result == null) return NotFound();
