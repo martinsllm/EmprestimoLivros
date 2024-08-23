@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoLivrosAPI", "EmprestimoLivrosAPI\EmprestimoLivrosAPI.csproj", "{468BD4D5-E4F8-4AF2-9A30-F5CE3D4FDC29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoLivros.Domain", "EmprestimoLivros.Domain\EmprestimoLivros.Domain.csproj", "{9BB14A8F-CD6D-417A-BE68-8304C79408DB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoLivros.Infra.Data", "EmprestimoLivros.Infra.Data\EmprestimoLivros.Infra.Data.csproj", "{CF8B8056-42F5-4D59-A03E-A59887A6B742}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoLivros.API", "EmprestimoLivros.API\EmprestimoLivros.API.csproj", "{CA466AA2-0470-435A-BBB8-90A4EF7F9A43}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoLivros.Infra.Ioc", "EmprestimoLivros.Infra.Ioc\EmprestimoLivros.Infra.Ioc.csproj", "{9B685A61-2F30-4638-B36D-F8F96F2D7089}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoLivros.Application", "EmprestimoLivros.Application\EmprestimoLivros.Application.csproj", "{121A0984-9794-41AF-95A2-19AB94C807BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +19,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{468BD4D5-E4F8-4AF2-9A30-F5CE3D4FDC29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{468BD4D5-E4F8-4AF2-9A30-F5CE3D4FDC29}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{468BD4D5-E4F8-4AF2-9A30-F5CE3D4FDC29}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{468BD4D5-E4F8-4AF2-9A30-F5CE3D4FDC29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BB14A8F-CD6D-417A-BE68-8304C79408DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BB14A8F-CD6D-417A-BE68-8304C79408DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BB14A8F-CD6D-417A-BE68-8304C79408DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BB14A8F-CD6D-417A-BE68-8304C79408DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF8B8056-42F5-4D59-A03E-A59887A6B742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF8B8056-42F5-4D59-A03E-A59887A6B742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF8B8056-42F5-4D59-A03E-A59887A6B742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF8B8056-42F5-4D59-A03E-A59887A6B742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA466AA2-0470-435A-BBB8-90A4EF7F9A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA466AA2-0470-435A-BBB8-90A4EF7F9A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA466AA2-0470-435A-BBB8-90A4EF7F9A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA466AA2-0470-435A-BBB8-90A4EF7F9A43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B685A61-2F30-4638-B36D-F8F96F2D7089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B685A61-2F30-4638-B36D-F8F96F2D7089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B685A61-2F30-4638-B36D-F8F96F2D7089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B685A61-2F30-4638-B36D-F8F96F2D7089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{121A0984-9794-41AF-95A2-19AB94C807BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{121A0984-9794-41AF-95A2-19AB94C807BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{121A0984-9794-41AF-95A2-19AB94C807BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{121A0984-9794-41AF-95A2-19AB94C807BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
