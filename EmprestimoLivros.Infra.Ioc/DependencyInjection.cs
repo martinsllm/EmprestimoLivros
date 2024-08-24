@@ -1,5 +1,8 @@
 using System.Text;
+using EmprestimoLivros.Application.DTOs;
+using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Mappings;
+using EmprestimoLivros.Application.Services;
 using EmprestimoLivros.Domain.Entities;
 using EmprestimoLivros.Domain.Interfaces;
 using EmprestimoLivros.Infra.Data;
@@ -37,11 +40,17 @@ namespace EmprestimoLivros.Infra.Ioc {
                 };
             });
 
+            services.AddAutoMapper(typeof(MappingDTO));
+
             services.AddScoped<IEntityRepository<Cliente>, ClienteRepository>();
             services.AddScoped<IEntityRepository<Livro>, LivroRepository>();
             services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-            services.AddAutoMapper(typeof(MappingDTO));
+
+            services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<ILivroService, LivroService>();
+            services.AddScoped<IEmprestimoService, EmprestimoService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
 
             return services;
         }

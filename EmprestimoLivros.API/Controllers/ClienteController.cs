@@ -1,7 +1,6 @@
-using AutoMapper;
 using EmprestimoLivros.Application.DTOs;
+using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Domain.Entities;
-using EmprestimoLivros.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,55 +10,48 @@ namespace EmprestimoLivros.API.Controllers {
     [Route("api/[controller]")]
     public class ClienteController : ControllerBase {
 
-        private readonly IEntityRepository<Cliente> _clienteRepository;
+        private readonly IClienteService _clienteService;
 
-        private readonly IMapper _mapper;
-
-        public ClienteController(IEntityRepository<Cliente> clientRepository, IMapper mapper) {
-            _clienteRepository = clientRepository;
-            _mapper = mapper;
+        public ClienteController(IClienteService clienteService) {
+            _clienteService = clienteService;
         }
 
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<List<Cliente>>> Get() {
-            var clientes = await _clienteRepository.Get();
-            var clientesDTO = _mapper.Map<List<ClienteDTO>>(clientes);
-            return Ok(clientesDTO);
+            var clientes = await _clienteService.Get();
+            return Ok(clientes);
         }
 
         [HttpGet("id")]
         [Authorize]
         public async Task<ActionResult<Cliente>> GetById(int id) {
-            var cliente = await _clienteRepository.GetById(id);
+            var cliente = await _clienteService.GetById(id);
             if(cliente == null) return NotFound();
-            var clienteDTO = _mapper.Map<ClienteDTO>(cliente);
-            return Ok(clienteDTO);
+            return Ok(cliente);
         }
 
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Cliente>> Create([FromBody] ClienteDTO clienteDTO) {
-            var cliente = _mapper.Map<Cliente>(clienteDTO);
-            var result = await _clienteRepository.Create(cliente);
-            if(result == null) return BadRequest();
+            var cliente = await _clienteService.Create(clienteDTO);
+            if(cliente == null) return BadRequest();
             return Created();
         }
 
         [HttpPut("id")]
         [Authorize]
         public async Task<ActionResult<Cliente>> Update([FromBody] ClienteDTO clienteDTO, int id) {
-            var cliente = _mapper.Map<Cliente>(clienteDTO);
-            var result = await _clienteRepository.Update(cliente, id);
-            if(result == null) return NotFound();
+            var cliente = await _clienteService.Update(clienteDTO, id);
+            if(cliente == null) return NotFound();
             return NoContent();
         }
 
         [HttpDelete("id")]
         [Authorize]
         public async Task<ActionResult<Cliente>> Remove(int id) {
-            var result = await _clienteRepository.Remove(id);
-            if(result == null) return NotFound();
+            var cliente = await _clienteService.Remove(id);
+            if(cliente == null) return NotFound();
             return Created();
         }
     }
