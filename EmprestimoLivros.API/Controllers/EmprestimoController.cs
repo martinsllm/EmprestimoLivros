@@ -37,7 +37,7 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<Emprestimo>> Remove(int id) {
             var emprestimo = await _emprestimoService.Remove(id);
-            if(emprestimo == null) return NotFound();
+            if(emprestimo == null) return BadRequest();
             return NoContent();
         }
 

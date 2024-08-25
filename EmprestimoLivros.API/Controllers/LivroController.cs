@@ -43,7 +43,7 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<Livro>> Update([FromBody] LivroDTO livroDTO, int id) {
             var livro = await _livroService.Update(livroDTO, id);
-            if(livro == null) return NotFound();
+            if(livro == null) return BadRequest();
             return NoContent();
         }
 
@@ -51,7 +51,7 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<Livro>> Remove(int id) {
             var livro = await _livroService.Remove(id);
-            if(livro == null) return NotFound();
+            if(livro == null) return BadRequest();
             return NoContent();
         }
 
