@@ -7,6 +7,8 @@ namespace EmprestimoLivros.Application.Interfaces {
 
         Task<Usuario> Create(UsuarioDTO usuarioDTO);
 
+        Task<Usuario> GetByEmail(string email);
+
         Task<string?> Login(string email, string password);
 
 

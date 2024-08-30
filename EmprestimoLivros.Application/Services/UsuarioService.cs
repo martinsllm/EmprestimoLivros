@@ -25,6 +25,11 @@ namespace EmprestimoLivros.Application.Services {
             return usuarioCriado;
         }
 
+        public async Task<Usuario> GetByEmail(string email) {
+            var usuario = await _usuarioRepository.GetByEmail(email);
+            return usuario;
+        }
+
         public async Task<string?> Login(string email, string password) {
             var usuario = await _usuarioRepository.Login(email, password);
             return usuario;

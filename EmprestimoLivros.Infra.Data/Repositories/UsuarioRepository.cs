@@ -24,8 +24,12 @@ namespace EmprestimoLivros.Infra.Data.Repositories {
             return usuarioData;
         }
 
+        public async Task<Usuario?> GetByEmail(string email) {
+            return await _dbContext.Usuarios.FirstOrDefaultAsync(user => user.Email == email);
+        }
+
         public async Task<string?> Login(string email, string password) {
-            var user = await _dbContext.Usuarios.FirstOrDefaultAsync(x => x.Email == email);
+            var user = await GetByEmail(email);
 
             if(user != null) {
                 bool isValidPassword = BCrypt.Net.BCrypt.Verify(password, user.Password);
