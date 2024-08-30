@@ -29,7 +29,7 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<Emprestimo>> Create([FromBody] EmprestimoPostDTO emprestimoDTO) {
             var emprestimo = await _emprestimoService.Create(emprestimoDTO);
-            if(emprestimo == null) return BadRequest();
+            if(emprestimo == null) return BadRequest("Ocorreu um erro ao realizar o empréstimo!");
             return Created();
         }
 
@@ -37,7 +37,7 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<Emprestimo>> Remove(int id) {
             var emprestimo = await _emprestimoService.Remove(id);
-            if(emprestimo == null) return BadRequest();
+            if(emprestimo == null) return BadRequest("Ocorreu um erro ao excluir o empréstimo!");
             return NoContent();
         }
 

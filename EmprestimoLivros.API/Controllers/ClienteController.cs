@@ -27,7 +27,7 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<Cliente>> GetById(int id) {
             var cliente = await _clienteService.GetById(id);
-            if(cliente == null) return NotFound();
+            if(cliente == null) return NotFound("Cliente não encontrado!");
             return Ok(cliente);
         }
 
@@ -35,10 +35,10 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<Cliente>> Create([FromBody] ClienteDTO clienteDTO) {
             var verificaSeClienteExiste = await _clienteService.GetByEmail(clienteDTO.Email);
-            if(verificaSeClienteExiste != null) return Conflict();
+            if(verificaSeClienteExiste != null) return Conflict("Já existe um cliente cadastrado com este e-mail!");
 
             var cliente = await _clienteService.Create(clienteDTO);
-            if(cliente == null) return BadRequest();
+            if(cliente == null) return BadRequest("Ocorreu um erro ao cadastrar o cliente!");
             return Created();
         }
 
@@ -46,7 +46,7 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<Cliente>> Update([FromBody] ClienteDTO clienteDTO, int id) {
             var cliente = await _clienteService.Update(clienteDTO, id);
-            if(cliente == null) return BadRequest();
+            if(cliente == null) return BadRequest("Ocorreu um erro ao alterar os dados do cliente!");
             return NoContent();
         }
 
@@ -54,7 +54,7 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<Cliente>> Remove(int id) {
             var cliente = await _clienteService.Remove(id);
-            if(cliente == null) return BadRequest();
+            if(cliente == null) return BadRequest("Ocorreu um erro ao excluir o cliente!");
             return Created();
         }
     }

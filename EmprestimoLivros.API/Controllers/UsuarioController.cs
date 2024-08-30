@@ -18,14 +18,14 @@ namespace EmprestimoLivros.API.Controllers {
         [HttpPost]
         public async Task<ActionResult<Usuario>> Create([FromBody] UsuarioDTO usuarioDTO) {
             var usuario = await _usuarioService.Create(usuarioDTO);
-            if(usuario == null) return BadRequest();
+            if(usuario == null) return BadRequest("Ocorreu um erro ao tentar se cadastrar!");
             return Created();
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<Usuario>> Login(string email, string password) {
             var usuario = await _usuarioService.Login(email, password);
-            if(usuario == null) return Unauthorized();
+            if(usuario == null) return Unauthorized("Acesso não autorizado!");
             return Ok(usuario);
         }
 

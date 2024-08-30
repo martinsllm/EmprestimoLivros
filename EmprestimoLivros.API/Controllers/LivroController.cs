@@ -27,7 +27,7 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<List<Livro>>> GetById(int id) {
             var livro = await _livroService.GetById(id);
-            if(livro == null) return NotFound();
+            if(livro == null) return NotFound("Livro não localizado!");
             return Ok(livro);
         }
 
@@ -35,7 +35,7 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<Livro>> Create([FromBody] LivroDTO livroDTO) {
             var livro = await _livroService.Create(livroDTO);
-            if(livro == null) return BadRequest();
+            if(livro == null) return BadRequest("Ocorreu um erro ao cadastrar o livro!");
             return Created();
         }
 
@@ -43,7 +43,7 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<Livro>> Update([FromBody] LivroDTO livroDTO, int id) {
             var livro = await _livroService.Update(livroDTO, id);
-            if(livro == null) return BadRequest();
+            if(livro == null) return BadRequest("Ocorreu um erro ao alterar o livro!");
             return NoContent();
         }
 
@@ -51,7 +51,7 @@ namespace EmprestimoLivros.API.Controllers {
         [Authorize]
         public async Task<ActionResult<Livro>> Remove(int id) {
             var livro = await _livroService.Remove(id);
-            if(livro == null) return BadRequest();
+            if(livro == null) return BadRequest("Ocorreu um erro ao excluir o livro!");
             return NoContent();
         }
 
