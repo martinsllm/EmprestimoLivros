@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmprestimoLivros.Infra.Data.Repositories {
 
-    public class ClienteRepository : IEntityRepository<Cliente> {
+    public class ClienteRepository : IClienteRepository {
 
         private readonly EmprestimoDbContext _context;
 
@@ -20,6 +20,11 @@ namespace EmprestimoLivros.Infra.Data.Repositories {
 
         public async Task<Cliente?> GetById(int id) {
             return await _context.Clientes.FindAsync(id);
+        }
+
+        public async Task<Cliente?> GetByEmail(string email) {
+            return await _context.Clientes.Where(cli => cli.Email == email)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<Cliente> Create(Cliente clienteData) {

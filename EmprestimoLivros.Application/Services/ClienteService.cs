@@ -8,11 +8,11 @@ namespace EmprestimoLivros.Application.Services {
 
     public class ClienteService : IClienteService {
 
-        private readonly IEntityRepository<Cliente> _clienteRepository;
+        private readonly IClienteRepository _clienteRepository;
 
         private readonly IMapper _mapper;
 
-        public ClienteService(IEntityRepository<Cliente> clientRepository, IMapper mapper) {
+        public ClienteService(IClienteRepository clientRepository, IMapper mapper) {
             _clienteRepository = clientRepository;
             _mapper = mapper;
         }
@@ -25,6 +25,11 @@ namespace EmprestimoLivros.Application.Services {
         public async Task<ClienteDTO> GetById(int id) {
             var cliente = await _clienteRepository.GetById(id);
             return _mapper.Map<ClienteDTO>(cliente);
+        }
+
+        public async Task<Cliente> GetByEmail(string email) {
+            var cliente = await _clienteRepository.GetByEmail(email);
+            return cliente;
         }
 
         public async Task<Cliente> Create(ClienteDTO clienteDTO){
@@ -43,5 +48,6 @@ namespace EmprestimoLivros.Application.Services {
             var clienteExcluido = await _clienteRepository.Remove(id);
             return clienteExcluido;
         }
+
     }
 }

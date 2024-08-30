@@ -9,6 +9,8 @@ namespace EmprestimoLivros.Application.Interfaces {
 
         Task<ClienteDTO> GetById(int id);
 
+        Task<Cliente> GetByEmail(string email);
+
         Task<Cliente> Create(ClienteDTO clienteDTO);
 
         Task<Cliente?> Update(ClienteDTO clienteDTO, int id);

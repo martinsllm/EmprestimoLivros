@@ -42,8 +42,8 @@ namespace EmprestimoLivros.Infra.Ioc {
 
             services.AddAutoMapper(typeof(MappingDTO));
 
-            services.AddScoped<IEntityRepository<Cliente>, ClienteRepository>();
-            services.AddScoped<IEntityRepository<Livro>, LivroRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<ILivroRepository, LivroRepository>();
             services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 

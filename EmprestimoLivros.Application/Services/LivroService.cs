@@ -8,11 +8,11 @@ namespace EmprestimoLivros.Application.Services {
 
     public class LivroService : ILivroService {
 
-        private readonly IEntityRepository<Livro> _livroRepository;
+        private readonly ILivroRepository _livroRepository;
 
         private readonly IMapper _mapper;
 
-        public LivroService(IEntityRepository<Livro> livroRepository, IMapper mapper) {
+        public LivroService(ILivroRepository livroRepository, IMapper mapper) {
             _livroRepository = livroRepository;
             _mapper = mapper;
         }

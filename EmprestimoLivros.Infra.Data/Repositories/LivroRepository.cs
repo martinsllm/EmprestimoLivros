@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmprestimoLivros.Infra.Data.Repositories {
 
-    public class LivroRepository : IEntityRepository<Livro> {
+    public class LivroRepository : ILivroRepository {
 
         private readonly EmprestimoDbContext _context;
 

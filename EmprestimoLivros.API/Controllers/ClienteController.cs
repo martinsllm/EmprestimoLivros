@@ -34,6 +34,9 @@ namespace EmprestimoLivros.API.Controllers {
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Cliente>> Create([FromBody] ClienteDTO clienteDTO) {
+            var verificaSeClienteExiste = await _clienteService.GetByEmail(clienteDTO.Email);
+            if(verificaSeClienteExiste != null) return Conflict();
+
             var cliente = await _clienteService.Create(clienteDTO);
             if(cliente == null) return BadRequest();
             return Created();
