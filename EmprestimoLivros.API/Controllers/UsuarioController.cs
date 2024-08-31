@@ -17,8 +17,8 @@ namespace EmprestimoLivros.API.Controllers {
 
         [HttpPost]
         public async Task<ActionResult<Usuario>> Create([FromBody] UsuarioDTO usuarioDTO) {
-            var verificaSeUsuarioExiste = await _usuarioService.GetByEmail(usuarioDTO.Email);
-            if(verificaSeUsuarioExiste != null) return Conflict("Já existe um usuário registrado com este e-mail!");
+            var verificaSeEmailExiste = await _usuarioService.GetByEmail(usuarioDTO.Email);
+            if(verificaSeEmailExiste != null) return Conflict("Já existe um usuário registrado com este e-mail!");
 
             var usuario = await _usuarioService.Create(usuarioDTO);
             if(usuario == null) return BadRequest("Ocorreu um erro ao tentar se cadastrar!");

@@ -27,7 +27,7 @@ namespace EmprestimoLivros.Application.Services {
             return _mapper.Map<ClienteDTO>(cliente);
         }
 
-        public async Task<Cliente> GetByEmail(string email) {
+        public async Task<Cliente?> GetByEmail(string email) {
             var cliente = await _clienteRepository.GetByEmail(email);
             return cliente;
         }
