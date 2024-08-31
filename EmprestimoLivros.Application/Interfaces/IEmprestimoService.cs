@@ -5,7 +5,9 @@ namespace EmprestimoLivros.Application.Interfaces {
 
     public interface IEmprestimoService {
 
-        Task<List<EmprestimoDTO>> GetByCliente(int id);
+        Task<List<EmprestimoDTO>> GetByCliente(int clienteId);
+
+        Task<Emprestimo?> GetByLivro(int livroId);
 
         Task<Emprestimo> Create(EmprestimoPostDTO emprestimoDTO);
 

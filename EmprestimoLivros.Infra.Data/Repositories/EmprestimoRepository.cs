@@ -15,13 +15,18 @@ namespace EmprestimoLivros.Infra.Data.Repositories {
 
         public async Task<List<Emprestimo>> GetByCliente(int id) {
             return await _context.Emprestimos
-                .Where(x => x.ClienteId == id)
+                .Where(emp => emp.ClienteId == id && emp.Entregue == false)
                 .Include(livro => livro.Livro)
                 .ToListAsync();
         }
 
         public async Task<Emprestimo?> GetById(int id) {
             return await _context.Emprestimos.FindAsync(id);
+        }
+
+        public async Task<Emprestimo?> GetByLivro(int livroId) {
+            return await _context.Emprestimos
+                .FirstOrDefaultAsync(emp => emp.LivroId == livroId && emp.Entregue == false);
         }
 
         public async Task<Emprestimo> Create(Emprestimo emprestimoData) {
@@ -42,6 +47,5 @@ namespace EmprestimoLivros.Infra.Data.Repositories {
 
             return null;
         }
-
     }
 }

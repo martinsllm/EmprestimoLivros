@@ -4,9 +4,11 @@ namespace EmprestimoLivros.Domain.Interfaces {
 
     public interface IEmprestimoRepository {
 
-        Task<List<Emprestimo>> GetByCliente(int id);
+        Task<List<Emprestimo>> GetByCliente(int clienteId);
 
         Task<Emprestimo?> GetById(int id);
+
+        Task<Emprestimo?> GetByLivro(int livroId);
 
         Task<Emprestimo> Create(Emprestimo data);
 
