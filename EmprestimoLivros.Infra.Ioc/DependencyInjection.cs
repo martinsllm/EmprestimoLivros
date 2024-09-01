@@ -1,9 +1,7 @@
 using System.Text;
-using EmprestimoLivros.Application.DTOs;
 using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Mappings;
 using EmprestimoLivros.Application.Services;
-using EmprestimoLivros.Domain.Entities;
 using EmprestimoLivros.Domain.Interfaces;
 using EmprestimoLivros.Infra.Data;
 using EmprestimoLivros.Infra.Data.Context;

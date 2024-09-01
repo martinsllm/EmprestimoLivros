@@ -27,7 +27,7 @@ namespace EmprestimoLivros.Application.Services {
             return emprestimo;
         }
 
-        public async Task<Emprestimo> Create(EmprestimoPostDTO emprestimoDTO) {
+        public async Task<Emprestimo?> Create(EmprestimoPostDTO emprestimoDTO) {
             var emprestimo = _mapper.Map<Emprestimo>(emprestimoDTO);
             var emprestimoCriado = await _emprestimoRepository.Create(emprestimo);
             return emprestimoCriado;

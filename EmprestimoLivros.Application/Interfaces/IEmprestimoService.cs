@@ -9,7 +9,7 @@ namespace EmprestimoLivros.Application.Interfaces {
 
         Task<Emprestimo?> GetByLivro(int livroId);
 
-        Task<Emprestimo> Create(EmprestimoPostDTO emprestimoDTO);
+        Task<Emprestimo?> Create(EmprestimoPostDTO emprestimoDTO);
 
         Task<Emprestimo?> Remove(int id);
     }
