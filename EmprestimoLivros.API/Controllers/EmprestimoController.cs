@@ -34,11 +34,11 @@ namespace EmprestimoLivros.API.Controllers {
             return Created();
         }
 
-        [HttpDelete("id")]
+        [HttpPatch("id")]
         [Authorize]
         public async Task<ActionResult<Emprestimo>> Remove(int id) {
             var emprestimo = await _emprestimoService.Remove(id);
-            if(emprestimo == null) return BadRequest("Ocorreu um erro ao excluir o empréstimo!");
+            if(emprestimo == null) return BadRequest("Ocorreu um erro ao finalizar o empréstimo!");
             return NoContent();
         }
 

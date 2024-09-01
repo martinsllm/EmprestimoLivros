@@ -21,7 +21,9 @@ namespace EmprestimoLivros.Infra.Data.Repositories {
         }
 
         public async Task<Emprestimo?> GetById(int id) {
-            return await _context.Emprestimos.FindAsync(id);
+            return await _context.Emprestimos
+                .Where(emp => emp.Id == id && emp.Entregue == false)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<Emprestimo?> GetByLivro(int livroId) {
@@ -35,11 +37,12 @@ namespace EmprestimoLivros.Infra.Data.Repositories {
             return emprestimoData;
         }
 
-        public async Task<Emprestimo?> Remove(int id) {
+        public async Task<Emprestimo?> ChangeStatus(int id) {
             var emprestimo = await GetById(id);
 
             if(emprestimo != null) {
-                _context.Emprestimos.Remove(emprestimo);
+                emprestimo.Entregue = true;
+                _context.Emprestimos.Update(emprestimo);
                 await _context.SaveChangesAsync();
 
                 return emprestimo;

@@ -12,7 +12,7 @@ namespace EmprestimoLivros.Domain.Interfaces {
 
         Task<Emprestimo> Create(Emprestimo data);
 
-        Task<Emprestimo?> Remove(int id);
+        Task<Emprestimo?> ChangeStatus(int id);
 
     }
 }

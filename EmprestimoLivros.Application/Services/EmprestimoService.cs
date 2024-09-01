@@ -34,8 +34,8 @@ namespace EmprestimoLivros.Application.Services {
         }
 
         public async Task<Emprestimo?> Remove(int id) {
-            var emprestimoExcluido = await _emprestimoRepository.Remove(id);
-            return emprestimoExcluido;
+            var emprestimoDevolvido = await _emprestimoRepository.ChangeStatus(id);
+            return emprestimoDevolvido;
         }
     }
 }
