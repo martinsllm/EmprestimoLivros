@@ -9,8 +9,14 @@ namespace EmprestimoLivros.Infra.Data.Repositories {
 
         private readonly EmprestimoDbContext _context;
 
-        public EmprestimoRepository(EmprestimoDbContext context) {
+        private readonly ILivroRepository _livroRepository;
+
+        private readonly IClienteRepository _clienteRepository;
+
+        public EmprestimoRepository(EmprestimoDbContext context, ILivroRepository livroRepository, IClienteRepository clienteRepository) {
             _context = context;
+            _livroRepository = livroRepository;
+            _clienteRepository = clienteRepository;
         }
 
         public async Task<List<Emprestimo>> GetByCliente(int id) {
@@ -31,7 +37,12 @@ namespace EmprestimoLivros.Infra.Data.Repositories {
                 .FirstOrDefaultAsync(emp => emp.LivroId == livroId && emp.Entregue == false);
         }
 
-        public async Task<Emprestimo> Create(Emprestimo emprestimoData) {
+        public async Task<Emprestimo?> Create(Emprestimo emprestimoData) {
+            var cliente = await _clienteRepository.GetById(emprestimoData.ClienteId);
+            var livro = await _livroRepository.GetById(emprestimoData.LivroId);
+
+            if(livro == null || cliente == null) return null;
+
             await _context.Emprestimos.AddAsync(emprestimoData);
             await _context.SaveChangesAsync();
             return emprestimoData;
